@@ -1,9 +1,38 @@
 <template>
-    <div>
-      <input type="text" v-model="username" placeholder="Username" />
-      <input type="password" v-model="password" placeholder="Password" />
-      <button @click="handleLogin">Login</button>
-    </div>
+  <v-app id="inspire">
+    <v-content>
+        <v-container fluid fill-height align="center">        
+          <v-card class="elevation-12 w-50">
+              <v-toolbar dark color="primary">
+                <v-toolbar-title>Login form</v-toolbar-title>
+              </v-toolbar>
+              <v-card-text>
+                <v-form>
+                    <v-text-field
+                      v-model="username"
+                      prepend-icon="person"
+                      name="login"
+                      label="Login"
+                      type="text"
+                    ></v-text-field>
+                    <v-text-field
+                      v-model="password"
+                      id="password"
+                      prepend-icon="lock"
+                      name="password"
+                      label="Password"
+                      type="password"
+                    ></v-text-field>
+                </v-form>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="primary" @click="handleLogin">Login</v-btn>
+              </v-card-actions>
+          </v-card>
+        </v-container>
+    </v-content>
+  </v-app>
   </template>
   
 <script>

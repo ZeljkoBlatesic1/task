@@ -9,7 +9,6 @@
         </v-app-bar>
         <v-main>
           <h1 class="text-center">DASHBOARD</h1>
-          <button @click="logout">Logout</button>
         </v-main>
         <v-footer app>
             <v-row justify="center">
