@@ -14,7 +14,7 @@
 
         <template v-slot:append>
           <div class="pa-2">
-            <v-btn block>
+            <v-btn block @click="logout">
               Logout
             </v-btn>
           </div>
@@ -28,6 +28,7 @@
   
 
 <script>
+import { mapActions } from 'vuex';
 export default {
   name: 'LeftNavbar',
 
@@ -35,5 +36,8 @@ export default {
       return {
       }
   },
+  methods: {
+    ...mapActions(['logout'])
+  }
 }
 </script>
