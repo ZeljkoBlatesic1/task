@@ -8,9 +8,12 @@
           <TopNavbar/>
         </v-app-bar>
         <v-main>
-          <h1 class="text-center">DASHBOARD</h1>
+          <h1 class="text-center my-8">DASHBOARD</h1>
           <div v-if="isAdminLoggedIn">
-            <h2>Admin is logged in.</h2>
+            <h2 class="text-center">Admin is logged in.</h2>
+          </div>
+          <div v-if="isViewLoggedIn">
+            <h2 class="text-center">Viewer is logged in.</h2>
           </div>
         </v-main>
         <v-footer app>
@@ -44,7 +47,8 @@ export default {
   },
   computed: {
   ...mapState(['loggedInUser']),
-  ...mapGetters(['isAdminLoggedIn'])
+  ...mapGetters(['isAdminLoggedIn']),
+  ...mapGetters(['isViewLoggedIn'])
   },
   methods: {
     ...mapActions(['logout'])

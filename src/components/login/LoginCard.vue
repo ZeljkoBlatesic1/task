@@ -36,7 +36,7 @@
   </template>
   
 <script>
-  import { mapActions } from 'vuex';
+  import { mapActions, mapGetters } from 'vuex';
   
   export default {
     data() {
@@ -50,6 +50,9 @@
       handleLogin() {
         this.login({ username: this.username, password: this.password });
       }
+    },
+    computed: {
+      ...mapGetters(['isAdminLoggedIn'])
     }
   };
   </script>

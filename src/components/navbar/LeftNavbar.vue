@@ -9,7 +9,12 @@
         <v-list color="transparent">
           <v-list-item prepend-icon="mdi-view-dashboard" title="Left navbar"></v-list-item>
           <v-list-item prepend-icon="mdi-account-box" title="Account"></v-list-item>
-          <v-list-item prepend-icon="mdi-gavel" title="Admin"></v-list-item>
+          <v-list-item prepend-icon="mdi-gavel" title="Users list"></v-list-item>
+          <div v-if="isAdminLoggedIn">
+            <v-list-item prepend-icon="mdi-gavel" title="Add"></v-list-item>
+            <v-list-item prepend-icon="mdi-gavel" title="Edit"></v-list-item>
+            <v-list-item prepend-icon="mdi-gavel" title="Delete"></v-list-item>
+          </div>
         </v-list>
 
         <template v-slot:append>
@@ -28,7 +33,7 @@
   
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 export default {
   name: 'LeftNavbar',
 
@@ -38,6 +43,9 @@ export default {
   },
   methods: {
     ...mapActions(['logout'])
-  }
+  },
+  computed: {
+  ...mapGetters(['isAdminLoggedIn'])
+  },
 }
 </script>
