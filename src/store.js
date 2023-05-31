@@ -15,7 +15,7 @@ const store = createStore({
   actions: {
     login({ commit }, { username, password }) {
       // Hard-coded username and password check
-      if (username === 'admin' && password === 'password') {
+      if (username === 'admin' && password === 'admin') {
         const user = {
           username: 'admin',
           role: 'admin'
@@ -25,12 +25,18 @@ const store = createStore({
         localStorage.setItem('loggedInUser', JSON.stringify(user));
       } else {
         // Handle incorrect credentials
+        alert("Warning - Incorrect credentials!");
       }
     },
     logout({ commit }) {
       commit('clearLoggedInUser');
       // Remove user information from local storage
       localStorage.removeItem('loggedInUser');
+    }
+  },
+  getters: {
+    isAdminLoggedIn(state) {
+      return state.loggedInUser && state.loggedInUser.role === 'admin';
     }
   }
 });

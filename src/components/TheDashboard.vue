@@ -9,6 +9,9 @@
         </v-app-bar>
         <v-main>
           <h1 class="text-center">DASHBOARD</h1>
+          <div v-if="isAdminLoggedIn">
+            <h2>Admin is logged in.</h2>
+          </div>
         </v-main>
         <v-footer app>
             <v-row justify="center">
@@ -29,21 +32,22 @@
 import LeftNavbar from './navbar/LeftNavbar.vue';
 import TopNavbar from './navbar/TopNavbar.vue';
 
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex';
 import LoginCard from './login/LoginCard.vue';
 
 export default {
-    name: "TheDashboard",
-    components: { LeftNavbar, TopNavbar, LoginCard },
-    data () {
-      return {
-      }
-    },
-    computed: {
-    ...mapState(['loggedInUser'])
+  name: "TheDashboard",
+  components: { LeftNavbar, TopNavbar, LoginCard },
+  data () {
+    return {
+    }
+  },
+  computed: {
+  ...mapState(['loggedInUser']),
+  ...mapGetters(['isAdminLoggedIn'])
   },
   methods: {
     ...mapActions(['logout'])
-  }
+  },
 }
 </script>

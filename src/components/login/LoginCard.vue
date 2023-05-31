@@ -10,18 +10,18 @@
                 <v-form>
                     <v-text-field
                       v-model="username"
-                      prepend-icon="person"
                       name="login"
                       label="Login"
                       type="text"
+                      @keyup.enter="handleLogin"
                     ></v-text-field>
                     <v-text-field
                       v-model="password"
                       id="password"
-                      prepend-icon="lock"
                       name="password"
                       label="Password"
                       type="password"
+                      @keyup.enter="handleLogin"
                     ></v-text-field>
                 </v-form>
               </v-card-text>
