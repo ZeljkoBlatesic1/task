@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -74,9 +75,13 @@ WSGI_APPLICATION = 'user_management.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+     'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'user_management',  # Name of your MySQL database
+        'USER': 'root',  # MySQL username
+        'PASSWORD': 'Dunjakremljan1!',  # MySQL password
+        'HOST': 'localhost',  # MySQL server host (default: 'localhost')
+        'PORT': '3306',  # MySQL server port (default: '3306')
     }
 }
 
