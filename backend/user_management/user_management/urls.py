@@ -1,3 +1,6 @@
+from django.contrib import admin
+from django.urls import path
+from users.views import get_users, get_roles
 """
 URL configuration for user_management project.
 
@@ -14,9 +17,14 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('users/', get_users),
+    path('roles/', get_roles),
 ]
+
+    # path('users/create/', create_user),
+    # path('users/<int:id>/', get_user),
+    # path('users/<int:id>/update/', update_user),
+    # path('users/<int:id>/delete/', delete_user),

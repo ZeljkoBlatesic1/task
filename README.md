@@ -1,6 +1,9 @@
 # vue-task
 GIVEN BY MIKULA&BERA
 
+Activate the virtual environment - env\Scripts\activate
+
+python manage.py runserver
 
 This template should help get you started developing with Vue 3 in Vite.
 
