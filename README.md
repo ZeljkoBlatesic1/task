@@ -1,9 +1,15 @@
 # vue-task
 GIVEN BY MIKULA&BERA
 
-Activate the virtual environment - env\Scripts\activate
+ACTIVATE BACKEND
 
-python manage.py runserver
+    1) Activate the virtual environment - env\Scripts\activate
+
+    2) start services MYSQL80 from task manager
+
+    3) start localhost instance in MYSQL workbench
+
+    4) run python manage.py runserver in cmd
 
 This template should help get you started developing with Vue 3 in Vite.
 

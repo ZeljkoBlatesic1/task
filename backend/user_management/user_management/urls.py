@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from users.views import get_users, get_roles
+from users.views import get_users, get_roles, create_user
 """
 URL configuration for user_management project.
 
@@ -21,6 +21,7 @@ Including another URLconf
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', get_users),
+    path('users/create/', create_user, name='create_user'),
     path('roles/', get_roles),
 ]
 
