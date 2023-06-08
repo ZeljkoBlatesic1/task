@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire">
-    <v-content>
+    
         <v-container fluid fill-height align="center">        
           <v-card class="elevation-12 w-50">
               <v-toolbar dark color="primary">
@@ -31,7 +31,7 @@
               </v-card-actions>
           </v-card>
         </v-container>
-    </v-content>
+    
   </v-app>
   </template>
   
