@@ -50,7 +50,7 @@ export default {
     return {};
   },
   computed: {
-    ...mapState(['loggedInUser', 'roles']),
+    ...mapState(['loggedInUser']),
     ...mapGetters(['isAdminLoggedIn', 'isViewLoggedIn']),
     roles() {
       return this.$store.state.roles.roles;
@@ -60,12 +60,7 @@ export default {
     ...mapActions(['logout']),
   },
   mounted() {
-    console.log('Computed', this.roles)
     this.$store.dispatch('getRoles')
-      .then(() => {
-        console.log('Roles:', this.$store.state.roles.roles);  // Access the roles from the store's state directly
-        //console.log('Roles:', this.$store.getters.roles);  // Alternatively, access the roles using the getter
-      })
       .catch((error) => {
         console.error('Error:', error);
       });

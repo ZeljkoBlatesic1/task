@@ -4,7 +4,7 @@ import apiClient from '../src/services/api.js'
 const store = createStore({
   state: {
     loggedInUser: null,
-    roles: [] 
+    //roles: [] 
   },
   mutations: {
     setLoggedInUser(state, user) {
@@ -45,7 +45,7 @@ const store = createStore({
       try {
         const response = await apiClient.get('/roles');
         // Handle the response and update the store as needed
-        console.log('Roles:', response.data);
+        //console.log('Roles:', response.data);
         commit('SET_ROLES', response.data);
       } catch (error) {
         // Handle the error
