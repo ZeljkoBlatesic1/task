@@ -21,7 +21,7 @@ Including another URLconf
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', get_users),
-    path('users/create/', create_user, name='create_user'),
+    path('users/create/', create_user),
     path('roles/', get_roles),
 ]
 

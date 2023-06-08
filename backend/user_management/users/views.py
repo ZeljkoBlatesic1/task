@@ -16,7 +16,7 @@ def get_users(request):
 
 def get_roles(request):
     roles = Role.objects.all()
-    roles_data = [{'id': role.id, 'username': role.name} for role in roles]
+    roles_data = [{'id': role.id, 'name': role.name} for role in roles]
     return JsonResponse({'roles': roles_data})
 
 

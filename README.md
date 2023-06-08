@@ -9,7 +9,7 @@ ACTIVATE BACKEND
 
     3) start localhost instance in MYSQL workbench
 
-    4) run python manage.py runserver in cmd
+    4) python manage.py runserver in cmd
 
 This template should help get you started developing with Vue 3 in Vite.
 

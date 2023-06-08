@@ -11,6 +11,12 @@
           <h1 class="text-center my-8">DASHBOARD</h1>
           <div v-if="isAdminLoggedIn">
             <h2 class="text-center">Admin is logged in.</h2>
+            <div>
+            <h3 class="text-center">Roles</h3>  
+            <ul class="text-center">
+              <li v-for="role in roles" :key="role.id">{{ role.name }}</li>
+            </ul>
+            </div>
           </div>
           <div v-if="isViewLoggedIn">
             <h2 class="text-center">Viewer is logged in.</h2>
@@ -34,24 +40,35 @@
 <script>
 import LeftNavbar from './navbar/LeftNavbar.vue';
 import TopNavbar from './navbar/TopNavbar.vue';
-
 import { mapState, mapActions, mapGetters } from 'vuex';
 import LoginCard from './login/LoginCard.vue';
 
 export default {
   name: "TheDashboard",
   components: { LeftNavbar, TopNavbar, LoginCard },
-  data () {
-    return {
-    }
+  data() {
+    return {};
   },
   computed: {
-  ...mapState(['loggedInUser']),
-  ...mapGetters(['isAdminLoggedIn']),
-  ...mapGetters(['isViewLoggedIn'])
+    ...mapState(['loggedInUser', 'roles']),
+    ...mapGetters(['isAdminLoggedIn', 'isViewLoggedIn']),
+    roles() {
+      return this.$store.state.roles.roles;
+    },
   },
   methods: {
-    ...mapActions(['logout'])
+    ...mapActions(['logout']),
   },
-}
+  mounted() {
+    console.log('Computed', this.roles)
+    this.$store.dispatch('getRoles')
+      .then(() => {
+        console.log('Roles:', this.$store.state.roles.roles);  // Access the roles from the store's state directly
+        //console.log('Roles:', this.$store.getters.roles);  // Alternatively, access the roles using the getter
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  },
+};
 </script>

@@ -1,8 +1,10 @@
 import { createStore } from 'vuex';
+import apiClient from '../src/services/api.js'
 
 const store = createStore({
   state: {
-    loggedInUser: null
+    loggedInUser: null,
+    roles: [] 
   },
   mutations: {
     setLoggedInUser(state, user) {
@@ -10,7 +12,10 @@ const store = createStore({
     },
     clearLoggedInUser(state) {
       state.loggedInUser = null;
-    }
+    },
+    SET_ROLES(state, roles) {
+      state.roles = roles;
+    },
   },
   actions: {
     login({ commit }, { username, password }) {
@@ -35,7 +40,18 @@ const store = createStore({
     logout({ commit }) {
       commit('clearLoggedInUser');
       localStorage.removeItem('loggedInUser');
-    }
+    },
+    async getRoles({ commit }) {
+      try {
+        const response = await apiClient.get('/roles');
+        // Handle the response and update the store as needed
+        console.log('Roles:', response.data);
+        commit('SET_ROLES', response.data);
+      } catch (error) {
+        // Handle the error
+        console.error('Error:', error);
+      }
+    },
   },
   getters: {
     isAdminLoggedIn(state) {
