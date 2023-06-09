@@ -4,7 +4,8 @@ import apiClient from '../src/services/api.js'
 const store = createStore({
   state: {
     loggedInUser: null,
-    //roles: [] 
+    //roles: [],
+    users: [] 
   },
   mutations: {
     setLoggedInUser(state, user) {
@@ -15,6 +16,9 @@ const store = createStore({
     },
     SET_ROLES(state, roles) {
       state.roles = roles;
+    },
+    SET_USERS(state, users) {
+      state.users = users;
     },
   },
   actions: {
@@ -47,6 +51,17 @@ const store = createStore({
         // Handle the response and update the store as needed
         //console.log('Roles:', response.data);
         commit('SET_ROLES', response.data);
+      } catch (error) {
+        // Handle the error
+        console.error('Error:', error);
+      }
+    },
+    async getUsers({ commit }) {
+      try {
+        const response = await apiClient.get('/users');
+        // Handle the response and update the store as needed
+        //console.log('Roles:', response.data);
+        commit('SET_USERS', response.data);
       } catch (error) {
         // Handle the error
         console.error('Error:', error);

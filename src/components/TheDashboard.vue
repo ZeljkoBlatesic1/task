@@ -12,10 +12,14 @@
           <div v-if="isAdminLoggedIn">
             <h2 class="text-center">Admin is logged in.</h2>
             <div>
-            <h3 class="text-center">Roles</h3>  
-            <ul class="text-center">
-              <li v-for="role in roles" :key="role.id">{{ role.name }}</li>
-            </ul>
+              <h3 class="text-center mt-8">Roles</h3>  
+              <ul class="text-center">
+                <li v-for="role in roles" :key="role.id">{{ role.name }}</li>
+              </ul>
+              <h3 class="text-center mt-8">Users</h3>
+              <ul class="text-center">
+                <li v-for="user in users" :key="user.id">{{ user.username}}</li>
+              </ul>
             </div>
           </div>
           <div v-if="isViewLoggedIn">
@@ -55,12 +59,22 @@ export default {
     roles() {
       return this.$store.state.roles.roles;
     },
+    users() {
+      return this.$store.state.users.users;
+    },
   },
   methods: {
     ...mapActions(['logout']),
   },
   mounted() {
     this.$store.dispatch('getRoles')
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+    this.$store.dispatch('getUsers')
+      .then(()=>{
+        console.log('Gojko', this.users)
+      })
       .catch((error) => {
         console.error('Error:', error);
       });
