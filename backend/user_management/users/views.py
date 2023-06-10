@@ -24,12 +24,8 @@ def get_roles(request):
 def create_user(request):
     if request.method == 'POST':
         try:
-            # Extract the data from the request body
             data = json.loads(request.body)
-
-            # Perform validation on the received data
-            if 'id' not in data:
-                raise ValueError('Id is required.')
+            
             if 'first_name' not in data:
                 raise ValueError('First name is required.')
             if 'last_name' not in data:
@@ -41,10 +37,7 @@ def create_user(request):
             if 'role_id' not in data:
                 raise ValueError('Role is required.')
 
-            # Create a new user object
-            # Replace this with your actual model and field names
             user = User.objects.create(
-                id=data['id'],
                 first_name=data['first_name'],
                 last_name=data['last_name'],
                 email=data['email'],
@@ -52,14 +45,11 @@ def create_user(request):
                 role_id=data['role_id'],
             )
 
-            # Return a success response
             return JsonResponse({'message': 'User created successfully.'})
 
         except Exception as e:
-            # Handle any errors that occurred during user creation
             return JsonResponse({'error': str(e)}, status=400)
 
-    # Return an error response for unsupported HTTP methods
     return JsonResponse({'error': 'Invalid request method.'}, status=405)
 
 

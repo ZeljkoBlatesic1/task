@@ -20,6 +20,15 @@ const store = createStore({
     SET_USERS(state, users) {
       state.users = users;
     },
+    resetUserForm(state) {
+      state.userForm = {
+        first_name: '',
+        last_name: '',
+        email: '',
+        password: '',
+        role_id: null,
+      };
+    },
   },
   actions: {
     login({ commit }, { username, password }) {
@@ -48,23 +57,32 @@ const store = createStore({
     async getRoles({ commit }) {
       try {
         const response = await apiClient.get('/roles');
-        // Handle the response and update the store as needed
-        //console.log('Roles:', response.data);
         commit('SET_ROLES', response.data);
       } catch (error) {
-        // Handle the error
         console.error('Error:', error);
       }
     },
     async getUsers({ commit }) {
       try {
         const response = await apiClient.get('/users');
-        // Handle the response and update the store as needed
-        //console.log('Roles:', response.data);
         commit('SET_USERS', response.data);
       } catch (error) {
-        // Handle the error
         console.error('Error:', error);
+      }
+    },
+    async createUser({ commit, dispatch }, userData) {
+      try {
+        const url = '/users/create/';
+        const response = await apiClient.post(url, userData);
+    
+        console.log('User created successfully:', response.data);
+    
+        commit('resetUserForm');
+    
+        dispatch('getUsers');
+      } catch (error) {
+        console.error('Error creating user:', error.response.data);
+        console.log('Podaci', userData)
       }
     },
   },

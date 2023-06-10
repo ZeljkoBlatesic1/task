@@ -10,20 +10,52 @@
         <v-main>
           <h1 class="text-center my-8">DASHBOARD</h1>
           <div v-if="isAdminLoggedIn">
-            <h2 class="text-center">Admin is logged in.</h2>
-            <div>
-              <h3 class="text-center mt-8">Roles</h3>  
-              <ul class="text-center">
-                <li v-for="role in roles" :key="role.id">{{ role.name }}</li>
-              </ul>
-              <h3 class="text-center mt-8">Users</h3>
-              <ul class="text-center">
-                <li v-for="user in users" :key="user.id">{{ user.username}}</li>
-              </ul>
+            <h2 class="text-center">Admin is logged in.</h2>      
+            <h3 class="text-center mt-8">Roles</h3>  
+            <ul class="text-center">
+              <li v-for="role in roles" :key="role.id">{{ role.name }}</li>
+            </ul>
+            <h3 class="text-center mt-8">Users</h3>
+            <ul class="text-center">
+              <li v-for="user in users" :key="user.id">{{ user.username}}</li>
+            </ul>
+            <div class="text-center my-8 rounded-pill">
+              <h3 class="text-center mt-8">Create User</h3>
+              <form @submit.prevent="createUser(userForm)" name="createForm">
+                <!-- <div>
+                  <label for="id">Id:</label>
+                  <input type="number" v-model="userForm.id" required>
+                </div> -->
+                <div>
+                  <label for="first_name">First Name:</label>
+                  <input type="text" v-model="userForm.first_name" required>
+                </div>
+                <div>
+                  <label for="last_name">Last Name:</label>
+                  <input type="text" v-model="userForm.last_name" required>
+                </div>
+                <div>
+                  <label for="email">Email:</label>
+                  <input type="email" v-model="userForm.email" required>
+                </div>
+                <div>
+                  <label for="password">Password:</label>
+                  <input type="password" v-model="userForm.password" required>
+                </div>
+                <div>
+                  <label for="role_Id">Role ID:</label>
+                  <input type="number" v-model="userForm.role_id" required>
+                </div>
+                <button type="submit">Create</button>
+              </form>
             </div>
           </div>
           <div v-if="isViewLoggedIn">
             <h2 class="text-center">Viewer is logged in.</h2>
+            <h3 class="text-center mt-8">Users</h3>
+            <ul class="text-center">
+              <li v-for="user in users" :key="user.id">{{ user.username}}</li>
+            </ul>
           </div>
         </v-main>
         <v-footer app>
@@ -51,7 +83,15 @@ export default {
   name: "TheDashboard",
   components: { LeftNavbar, TopNavbar, LoginCard },
   data() {
-    return {};
+    return {
+      userForm: {
+        first_name: '',
+        last_name: '',
+        email: '',
+        password: '',
+        role_id: null,
+      },
+    };
   },
   computed: {
     ...mapState(['loggedInUser']),
@@ -64,7 +104,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['logout']),
+    ...mapActions(['logout', 'createUser']),
   },
   mounted() {
     this.$store.dispatch('getRoles')
@@ -72,9 +112,6 @@ export default {
         console.error('Error:', error);
       });
     this.$store.dispatch('getUsers')
-      .then(()=>{
-        console.log('Gojko', this.users)
-      })
       .catch((error) => {
         console.error('Error:', error);
       });
